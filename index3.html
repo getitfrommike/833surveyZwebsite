@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>What Surveys Capture</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      color: #333;
+
+
+.top-banner {
+  width: 100%;
+  background-color: #e0ecff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.top-banner img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+
+
+    }
+    header {
+      background: #3b82f6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .cta-bar {
+      background: #2563eb;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .cta-bar button {
+      margin-left: 10px;
+      background: white;
+      color: #2563eb;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filters {
+      text-align: center;
+      margin: 20px;
+    }
+    .filters button {
+      background: #eff6ff;
+      border: none;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #2563eb;
+      font-size: 18px;
+    }
+    .card p {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    .card ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .card ul li {
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 40px auto;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    th {
+      background-color: #eff6ff;
+    }
+    .ai-helper {
+      text-align: center;
+      margin: 30px auto;
+    }
+    .ai-helper input {
+      padding: 10px;
+      width: 60%;
+      max-width: 500px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .ai-helper button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="top-banner">
+  <img src="833banner.png" alt="833SURVEYZ Banner" />
+</div>
+
+
+
+
+
+  <header>
+    <h1>What Surveys Can Capture</h1>
+    <p style="margin-top: 10px; font-size: 15px;">Explore the full range of insights possible through surveys</p>
+  </header>
+
+  <!-- Email Capture Section -->
+  <div style="background: #e0ecff; padding: 30px 20px; text-align: center; margin: 0 auto;">
+    <h2 style="margin-top: 0;">🎁 Get a Free Survey Strategy Guide</h2>
+    <p style="max-width: 600px; margin: auto;">Enter your name and email and we’ll send you a proven framework to improve survey responses and convert more users.</p>
+    <form onsubmit="captureEmail(event)" style="margin-top: 20px;">
+      <input type="text" id="userName" placeholder="Your Name" required style="padding:10px; width: 200px; margin:5px; border-radius: 6px; border: 1px solid #ccc;">
+      <input type="email" id="userEmail" placeholder="Your Email" required style="padding:10px; width: 250px; margin:5px; border-radius: 6px; border: 1px solid #ccc;">
+      <button type="submit" style="padding: 10px 16px; background-color: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">Send Me the Guide</button>
+    </form>
+    <p id="emailConfirm" style="color: green; font-weight: bold; margin-top: 15px;"></p>
+  </div>
+
+  <div class="cta-bar">
+    <strong>Want help creating your survey?</strong>
+    <button onclick="window.location.href='https://833surveyz.com/book'">Book a Free Consult</button>
+  </div>
+
+  <div class="filters">
+    <button onclick="filterCards('all')">All</button>
+    <button onclick="filterCards('CX')">Customer Feedback</button>
+    <button onclick="filterCards('Product')">Product Research</button>
+  </div>
+
+  <div class="container" id="cardsContainer"></div>
+
+  <div class="ai-helper">
+    <h3>Need Help Choosing a Survey Type?</h3>
+    <input type="text" id="inputUseCase" placeholder="e.g., I want to reduce churn" />
+    <button onclick="suggestSurvey()">Suggest</button>
+    <p id="suggestionOutput" style="margin-top:10px; font-weight:bold;"></p>
+  </div>
+
+  <div style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <h2>🧾 Summary Table</h2>
+    <table>
+      <tr><th>What Surveys Capture</th><th>Purpose</th></tr>
+      <tr><td>✅ Demographics</td><td>Segmentation, targeting</td></tr>
+      <tr><td>✅ Psychographics</td><td>Understand motivations, values</td></tr>
+      <tr><td>✅ Preferences</td><td>Product and UX feedback</td></tr>
+      <tr><td>✅ Awareness</td><td>Brand or issue recognition</td></tr>
+      <tr><td>✅ Perceptions & Beliefs</td><td>Mental models, attitudes</td></tr>
+      <tr><td>✅ Satisfaction</td><td>Service & experience ratings</td></tr>
+      <tr><td>✅ Intentions</td><td>Predict future behavior</td></tr>
+      <tr><td>✅ Behavior</td><td>Past actions and usage</td></tr>
+      <tr><td>✅ Needs & Pain Points</td><td>Innovation and retention</td></tr>
+      <tr><td>✅ Trends Over Time</td><td>Measure change and impact</td></tr>
+      <tr><td>✅ Cultural/Emotional Cues</td><td>DEI, values, wellness</td></tr>
+    </table>
+  </div>
+
+  <footer>Designed to highlight the strategic power of surveys. All content © 2025.</footer>
+
+  <script>
+    const surveyData = [
+      {
+        title: "🧠 Demographics",
+        category: "CX",
+        desc: "Basic characteristics of respondents used for segmentation.",
+        examples: ["Age", "Gender", "Location", "Education level"],
+        why: "Identify target groups and segmentation opportunities."
+      },
+      {
+        title: "🧩 Psychographics",
+        category: "Product",
+        desc: "Values, interests, and lifestyles that shape behavior.",
+        examples: ["Values", "Personality traits", "Lifestyle"],
+        why: "Helps define personas and brand alignment."
+      },
+      {
+        title: "💰 Preferences",
+        category: "Product",
+        desc: "Choices among options, like product features or design.",
+        examples: ["Preferred logo", "Top feature", "Brand loyalty"],
+        why: "Useful for product design and marketing creative."
+      },
+      {
+        title: "📢 Awareness",
+        category: "CX",
+        desc: "Familiarity with brand, product, or campaign.",
+        examples: ["Have you heard of X?", "Logo recognition", "Message recall"],
+        why: "Measures reach and marketing effectiveness."
+      },
+      {
+        title: "🧠 Beliefs & Perceptions",
+        category: "CX",
+        desc: "What customers think or feel about something.",
+        examples: ["This company cares", "Policy is fair", "Looks complicated"],
+        why: "Influences attitude and decision-making."
+      },
+      {
+        title: "📈 Satisfaction & Experience",
+        category: "CX",
+        desc: "Customer or user satisfaction with an experience.",
+        examples: ["Rate support", "Overall satisfaction", "Feedback on experience"],
+        why: "Key for retention and improvement."
+      },
+      {
+        title: "🔄 Change Over Time",
+        category: "CX",
+        desc: "Shift in attitudes or usage behavior over time.",
+        examples: ["Increased/decreased usage", "Changed opinion", "New needs"],
+        why: "Useful for longitudinal studies and product iteration."
+      },
+      {
+        title: "🔍 Needs & Pain Points",
+        category: "Product",
+        desc: "Unmet needs or problems in user experience.",
+        examples: ["Biggest challenge", "Missing feature", "Frustration in checkout"],
+        why: "Drives product development and innovation."
+      }
+    ];
+
+    const container = document.getElementById("cardsContainer");
+
+    function renderCards(data) {
+      container.innerHTML = "";
+      data.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.category = item.category;
+        card.innerHTML = `
+          <h3>${item.title}</h3>
+          <p><strong>What It Captures:</strong> ${item.desc}</p>
+          <p><strong>Examples:</strong></p>
+          <ul>${item.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>
+          <p><strong>Why It Matters:</strong> ${item.why}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCards(category) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.display = (category === 'all' || card.dataset.category === category) ? 'flex' : 'none';
+      });
+    }
+
+    function suggestSurvey() {
+      const input = document.getElementById('inputUseCase').value.toLowerCase();
+      let result = "Try a General Feedback Survey!";
+      if (input.includes("employee")) result = "Try a Culture & Inclusion Survey.";
+      else if (input.includes("product")) result = "Try a Feature Preference or Usability Survey.";
+      else if (input.includes("churn")) result = "Try a Customer Satisfaction or Retention Survey.";
+      else if (input.includes("awareness")) result = "Try a Brand Awareness or Campaign Impact Survey.";
+      document.getElementById('suggestionOutput').textContent = result;
+    }
+
+    renderCards(surveyData);
+
+    function captureEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      console.log("Captured:", name, email);
+      document.getElementById("emailConfirm").textContent = `Thanks, ${name}! Your guide is on its way.`;
+      document.getElementById("userName").value = "";
+      document.getElementById("userEmail").value = "";
+    }
+  </script>
+</body>
+</html>
+
